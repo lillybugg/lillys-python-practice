@@ -1,0 +1,6 @@
+from itertools import combinations
+
+vertices = ['A', 'B', 'C', 'D']
+
+for D in combinations(vertices, 2):
+    print(D)
