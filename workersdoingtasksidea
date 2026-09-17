@@ -1,0 +1,14 @@
+vertices = [1, 2, 3, 4, 5, 6]
+
+subsets = list(combinations(vertices, 2))
+
+num_workers = 6
+
+num_subsets = len(subsets)
+
+subsets_per_worker = num_subsets // num_workers
+remainder = num_subsets % num_workers
+
+print("Total subsets:", num_subsets)
+print("Subsets per worker:", subsets_per_worker)
+print("Left over:", remainder)
