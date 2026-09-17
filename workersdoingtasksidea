@@ -14,7 +14,6 @@ print("Subsets per worker:", subsets_per_worker)
 print("Left over:", remainder)
 
 ### remainders get distributed in code below
-
 def partition_subsets(subsets, num_workers):
 
     num_subsets = len(subsets)
@@ -22,23 +21,29 @@ def partition_subsets(subsets, num_workers):
     subsets_per_worker = num_subsets // num_workers
     remainder = num_subsets % num_workers
 
-    partitions = [] #making an empty list
+    partitions = [] #making an empty list, eventually will be a list of lists
 
-    start = 0
+    start = 0 # Start at the beginning of the subsets list.
+# This tells us where the current worker's chunk starts.
 
     for worker in range(num_workers):
-
-        # Some workers get one extra subset, deciding who gets leftovers for dinner (lol)
+    # Go through each worker one at a time.
+    # If num_workers = 6, this loops 6 times:
+    # worker = 0, 1, 2, 3, 4, 5
+        
+        # Since we take floor, deciding who gets leftovers for dinner (lol)
         if worker < remainder:
             amount = subsets_per_worker + 1
         else:
             amount = subsets_per_worker
+            # Decide how many subsets this worker should receive.
+            # Workers at the beginning get 1 extra subset if there are leftovers.
+            
+        end = start + amount # Calculate where this worker's chunk ends.
+        
+        partitions.append(subsets[start:end]) #list of lists?
 
-        end = start + amount
-
-        partitions.append(subsets[start:end])
-
-        start = end
+        start = end # Move the starting point forward so the next worker starts where this worker finished.
 
     return partitions
 
