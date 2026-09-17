@@ -1,0 +1,11 @@
+from itertools import combinations
+
+vertices = [1, 2, 3, 4, 5, 6]
+
+subsets = list(combinations(vertices, 2))
+
+print("All subsets:", subsets)
+print("Number of subsets:", len(subsets))
+
+print("First 3:", subsets[0:3])
+print("Next 3:", subsets[3:6])
